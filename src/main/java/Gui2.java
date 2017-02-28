@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.mansfield.johnslw26.algorithmsfileloader.gui;
+
+
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,7 +16,7 @@ import javax.swing.JFileChooser;
  * @author luke
  */
 public class Gui2 extends javax.swing.JFrame {
-
+    public static Gui2 g2;
     /**
      * Creates new form Gui2
      */
@@ -37,12 +38,12 @@ public class Gui2 extends javax.swing.JFrame {
         input = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         output = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        code = new javax.swing.JTextPane();
         inputText = new javax.swing.JLabel();
         outputText = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         codeText = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        codeInput = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         fileMenuItem = new javax.swing.JMenu();
         openItem = new javax.swing.JMenuItem();
@@ -51,7 +52,6 @@ public class Gui2 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Algorithms File Loader");
         setLocation(new java.awt.Point(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         input.setColumns(20);
@@ -61,8 +61,6 @@ public class Gui2 extends javax.swing.JFrame {
         output.setColumns(20);
         output.setRows(5);
         jScrollPane2.setViewportView(output);
-
-        jScrollPane3.setViewportView(code);
 
         inputText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         inputText.setText("Input From File");
@@ -74,6 +72,16 @@ public class Gui2 extends javax.swing.JFrame {
         jLabel3.setText("Write Code Below");
 
         codeText.setText("Run");
+        codeText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codeTextActionPerformed(evt);
+            }
+        });
+
+        codeInput.setColumns(20);
+        codeInput.setRows(5);
+        codeInput.setText("public class Code{\n\n//Write your code within this class.\n//NOTE: to access the input information use the runtime arguments in the main method. \n//I suggest declaring a separate variable for the input.\n\n\tpublic static void main(String[] args){\n\t}\n\n}");
+        jScrollPane4.setViewportView(codeInput);
 
         fileMenuItem.setText("File");
         fileMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -110,19 +118,22 @@ public class Gui2 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputText))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputText)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(codeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputText))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(outputText)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(codeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +148,9 @@ public class Gui2 extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(codeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -174,12 +185,13 @@ public class Gui2 extends javax.swing.JFrame {
     }//GEN-LAST:event_fileMenuItemActionPerformed
 
     private void saveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveItemActionPerformed
-        /*
-        
-            THIS IS WHERE WE WILL SAVE THE OUTPUT AFTER THE CODE HAS RUN
-        
-        */
+           
     }//GEN-LAST:event_saveItemActionPerformed
+
+    private void codeTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codeTextActionPerformed
+       double[] array = new double[]{1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,};
+        CompilerJ.execute(array);
+    }//GEN-LAST:event_codeTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,14 +223,35 @@ public class Gui2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gui2().setVisible(true);
+                g2 = new Gui2();
+                g2.setVisible(true);
+                g2.setDefaultTexts();
             }
         });
+        
+        
+    }
+    public void setOutputText(String txt){
+        output.setText(txt);
+    }
+    public void setDefaultTexts(){
+        codeInput.setTabSize(4);
+        codeInput.setText("public class Code{\n" +
+"\n" +
+"//Write your code within this class.\n" +
+"//NOTE: to access the input information use the runtime arguments in the main method. \n" +
+"//I suggest declaring a separate variable for the input.\n" +
+"\n" +
+"	public static void main(String[] args){\n" +
+"	}\n" +
+"\n" +
+"}");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser FileChooser;
-    private javax.swing.JTextPane code;
+    private javax.swing.JTextArea codeInput;
     private javax.swing.JButton codeText;
     private javax.swing.JMenu fileMenuItem;
     private javax.swing.JTextArea input;
@@ -226,7 +259,7 @@ public class Gui2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openItem;
     private javax.swing.JTextArea output;
